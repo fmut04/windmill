@@ -2,14 +2,16 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const bcrypt = require('bcrypt')
+require('dotenv').config()
+
 app.use(express.json());
 app.use(cors());
 
 
 const dbName = 'authentication';
-  
+const env = process.env
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://f709:Romona04!@clicker-game-db.8nvb1a0.mongodb.net/?retryWrites=true&w=majority";
+const uri = `mongodb+srv://${env.DB-USERNAME}:${env.DB-PASSWORD}@${env.DB-SRC}/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
    client.connect().then(() => {
        console.log('Connected to MongoDB');
